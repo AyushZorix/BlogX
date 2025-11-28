@@ -1,0 +1,22 @@
+services:
+  app:
+    build: .
+    ports:
+      - "8003:8003"
+    environment:
+      - PORT=8003
+      - MONGO_URL=mongodb://mongo:27017/BlogX
+    depends_on:
+      - mongo
+    volumes:
+      - ./uploads:/app/uploads
+
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:
